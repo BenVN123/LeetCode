@@ -6,5 +6,7 @@ class Solution:
         while(i < len(t) and index < len(s)):
             if(t[i] == s[index]):
                 index += 1
-            i += 1        
+                
+            i += 1       
+            
         return index == len(s)
