@@ -4,14 +4,13 @@ class Solution:
         closers = {"(":")", "{":"}", "[":"]"}
         
         for i in s:
-            stack.append(i)
-            
-            try:
-                if len(stack) == 1:
-                    continue
-                elif i == closers[stack[-2]]:
-                    stack = stack[:-2]
-            except KeyError:
+            if i in closers.keys():
+                stack.append(i)
+            elif len(stack) == 0:
                 return False
-                    
+            elif closers[stack[-1]] == i:
+                stack = stack[:-1]
+            else:
+                return False
+                
         return len(stack) == 0
