@@ -1,21 +1,17 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-        lols = {']': '[', '}': '{', ')': '('}
+        closers = {"(":")", "{":"}", "[":"]"}
         
         for i in s:
-            if i in '({[':
-                stack.append(i)
-            else:
-                if len(stack) == 0:
-                    return False
-                if stack[-1] == lols[i]:
-                    stack.pop(-1)
-                else:
-                    return False
-        
-        if len(stack) == 0:
+            stack.append(i)
             
-            return True
-        
-        return False
+            try:
+                if len(stack) == 1:
+                    continue
+                elif i == closers[stack[-2]]:
+                    stack = stack[:-2]
+            except KeyError:
+                return False
+                    
+        return len(stack) == 0
